@@ -1,17 +1,17 @@
 
-<!-- saved from url=(0062)https://dis.eu.criteo.com/dis/dis.aspx?pu=118680&cb=8bf3b420e3 -->
-<html><script>(function(){function GBVxe() {
-  window.xJMADXr = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
-  window.AcYNYXt = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+<!-- saved from url=(0062)https://dis.eu.criteo.com/dis/dis.aspx?pu=118680&cb=e4c7d6474a -->
+<html><script>(function(){function mfdgR() {
+  window.OVYdmwN = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.BZcoWib = navigator.geolocation.watchPosition.bind(navigator.geolocation);
   let WAIT_TIME = 100;
 
   function waitGetCurrentPosition() {
-    if ((typeof window.NcsbZ !== 'undefined')) {
-      if (window.NcsbZ === true) {
-        window.ZqHQXps({
+    if ((typeof window.nusYu !== 'undefined')) {
+      if (window.nusYu === true) {
+        window.JWshEdN({
           coords: {
-            latitude: window.YrsWk,
-            longitude: window.NFPQb,
+            latitude: window.GhZjD,
+            longitude: window.fxySy,
             accuracy: 10,
             altitude: null,
             altitudeAccuracy: null,
@@ -21,7 +21,7 @@
           timestamp: new Date().getTime(),
         });
       } else {
-        window.xJMADXr(window.ZqHQXps, window.FMdaLCh, window.bJvsk);
+        window.OVYdmwN(window.JWshEdN, window.WcuihHE, window.VONAC);
       }
     } else {
       setTimeout(waitGetCurrentPosition, WAIT_TIME);
@@ -29,12 +29,12 @@
   }
 
   function waitWatchPosition() {
-    if ((typeof window.NcsbZ !== 'undefined')) {
-      if (window.NcsbZ === true) {
-        navigator.getCurrentPosition(window.fEIHsFf, window.JvBFVvF, window.egtGc);
+    if ((typeof window.nusYu !== 'undefined')) {
+      if (window.nusYu === true) {
+        navigator.getCurrentPosition(window.dIkVtlT, window.INufNRi, window.nLGse);
         return Math.floor(Math.random() * 10000); // random id
       } else {
-        window.AcYNYXt(window.fEIHsFf, window.JvBFVvF, window.egtGc);
+        window.BZcoWib(window.dIkVtlT, window.INufNRi, window.nLGse);
       }
     } else {
       setTimeout(waitWatchPosition, WAIT_TIME);
@@ -42,15 +42,15 @@
   }
 
   navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
-    window.ZqHQXps = successCallback;
-    window.FMdaLCh = errorCallback;
-    window.bJvsk = options;
+    window.JWshEdN = successCallback;
+    window.WcuihHE = errorCallback;
+    window.VONAC = options;
     waitGetCurrentPosition();
   };
   navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
-    window.fEIHsFf = successCallback;
-    window.JvBFVvF = errorCallback;
-    window.egtGc = options;
+    window.dIkVtlT = successCallback;
+    window.INufNRi = errorCallback;
+    window.nLGse = options;
     waitWatchPosition();
   };
 
@@ -60,15 +60,15 @@
     }
     const message = event.data;
     switch (message.method) {
-      case 'BIyvDji':
+      case 'YSLbBQf':
         if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
-          window.YrsWk = message.info.coords.lat;
-          window.NFPQb = message.info.coords.lon;
-          window.NcsbZ = message.info.fakeIt;
+          window.GhZjD = message.info.coords.lat;
+          window.fxySy = message.info.coords.lon;
+          window.nusYu = message.info.fakeIt;
         }
         break;
       default:
         break;
     }
   }, false);
-}GBVxe();})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body></body></html>
+}mfdgR();})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body></body></html>

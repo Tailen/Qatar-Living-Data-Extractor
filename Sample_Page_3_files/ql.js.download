@@ -1,0 +1,539 @@
+(function ($) {
+   
+    function initSwiper() {
+        var $swiper = $('.swiper-container');
+
+        if ($swiper.length) {
+
+            var $options = {
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+                slidesPerView: 1,//$swiper.attr('slidesperview') === 'undefined' ? 3 : $swiper.attr('slidesperview'),
+                spaceBetween: 0,
+                width: 0,
+                breakpoints: {
+                    1024: {slidesPerView: 2, spaceBetween: 15},
+                    768: {slidesPerView: 1, spaceBetween: 0},
+                    640: {slidesPerView: 1, spaceBetween: 0},
+                    320: {slidesPerView: 1, spaceBetween: 0}
+                },
+            };
+            if(window.innerWidth <= 482) {
+                $options.width = window.innerWidth - 1;
+            }
+            else if(window.innerWidth <= 768) {
+                $options.width = window.innerWidth / 2;
+                $options.slidesPerView = 2;
+            }
+            var swiperInstances = {};
+            $(".swiper-container").each(function (index, element) {
+                var $this = $(this);
+                $this.addClass("instance-" + index);
+                var slidesPerView = $this.attr('slidesperview') === 'undefined' ? 3 : $this.attr('slidesperview');
+                $options.slidesPerView = slidesPerView;
+                swiperInstances[index] = new Swiper(".instance-" + index, $options);
+            });
+            if (window.innerWidth > 768) {
+                $('.swiper-pagination').hide();
+                $(".swiper-container").each(function (index, element) {
+                    var swiper = this.swiper;
+                    var $this = $(this);
+                    var slidesPerView = $this.attr('slidesperview') === 'undefined' ? 3 : $this.attr('slidesperview');
+                    if (swiper.slides.length <= slidesPerView) {
+                        swiper.destroy(true, false);
+                    }
+                });
+            }
+        }
+    }
+
+    initSwiper();
+
+    var $sticky = $('#dfp-ad-property_search_300x600_float-wrapper'),
+            $window = $(window),
+            $footer = $('.b-logic-section.footer.v3-main-default'),
+            $document = $(document);
+    if ($sticky.length > 0) {
+        var stickyDiv = $sticky.offset().top;
+
+        $window.on('load scroll', function () {
+            var scrolled = $document.scrollTop() + 35;
+            var footerOffset = $footer.offset().top - 35;
+            var limit = footerOffset - $sticky.outerHeight(true);
+
+            if (scrolled > stickyDiv) {
+                $sticky.removeClass('is-absolute');
+                $sticky.css('top', 70);
+                $sticky.addClass('is-sticky');
+
+            } else {
+                $sticky.removeClass('is-sticky');
+            }
+
+            if (scrolled > limit) {
+                $sticky.removeClass('is-sticky');
+                $sticky.addClass('is-absolute');
+                $sticky.css('top', limit - 300);
+            }
+
+        });
+
+    }
+
+
+    $('.icon-phone').click(function(el) {
+            el.preventDefault();
+            var $el = $(el.currentTarget);
+
+            $el.find('.hide-on-print').hide();
+            $el.find('.show-on-click').show();
+            
+    }); 
+
+
+    /*
+     * DISABLE MULTIPLE CLICKS
+     * All node forms
+     * @author Khurram Fraz
+     */
+    $('form.node-form #edit-submit').click(function (el) {
+        $(this).hide();
+        $(this).parent('span.add-post-content--el-navigation-next').addClass('spinner');
+    });
+
+    $('form#user-profile-form #edit-submit').click(function () {
+        $(this).hide();
+        $(this).parent('span.add-post-content--el-navigation-next').addClass('spinner');
+    });
+
+    $('.googleMapPopUp').click(function () {
+        var thisPopup = $(this);
+        thisPopup.colorbox({
+            iframe: true,
+            innerWidth: 400,
+            innerHeight: 300,
+            opacity: 0.7,
+            href: thisPopup.attr('href')
+        });
+    });
+
+    $('form.comment-form #edit-submit--2').click(function () {
+        $(this).attr('disabled', 'disabled');
+        $(this).parents('form').submit();
+    });
+    $(".b-card--el-header a").click(function () {
+        var href = $(this).attr('href');
+        window.location = href;
+    });
+    $(".promoted-ads").click(function () {
+        var href = $(this).data('link');
+        window.location = href;
+        return false;
+    });
+
+
+
+
+    $('#comment-form #edit-submit').click(function () {
+        $(this).attr('disabled', 'disabled');
+        $(this).parents('form').submit();
+    });
+
+    $('.twite__share-button').on('click', function () {
+        $('.twite__panel').toggle();
+        return false;
+    });
+
+    $('.twite__close-button-graphic').on('click', function () {
+        $('.twite__panel').toggle();
+        return false;
+    });
+
+
+    $('input[type=radio][name=reset_options]').change(function () {
+        if (this.value == 'mobile') {
+            $('#edit-mobile-options').show();
+        } else if (this.value == 'email') {
+            $('#edit-mobile-options').hide();
+        }
+    });
+
+
+
+    if (Drupal.ajax != undefined) {
+        /**
+         * Modify form values prior to form submission.
+         */
+        //custom function to be called after ajax $commands[] = array('command' => 'beforeSubmit');
+        Drupal.ajax.prototype.beforeSubmit = function (form_values, element, options) {
+        };
+
+        //custom function to be called after ajax $commands[] = array('command' => 'afterAjax');
+        Drupal.ajax.prototype.commands.afterAjax = function (ajax, response, status) {
+            clearSearchKeywords();
+        };
+        // Our function name is prototyped as part of the Drupal.ajax namespace, adding to the commands:
+        Drupal.ajax.prototype.commands.changeURL = function (ajax, response, status)
+        {
+            if (typeof (history.pushState) != "undefined") {
+                var obj = {Title: '', Url: $('#ajax_new_url').attr('data-url')};
+                history.pushState(obj, obj.Title, obj.Url);
+            } else {
+                //Browser does not support HTML5
+            }
+        };
+    }
+
+
+    if ($(".prayer-times").length) {
+        $('.prayer-times').colorbox({rel: 'prayer-times', transition: 'fade', retinaImage: true, retinaUrl: true});
+    }
+
+
+
+
+    // if ($("#commercial-bank-vl").length) {
+    //     $('#commercial-bank-vl').colorbox({
+    //         href: "http://bit.ly/cbq2017",
+    //         iframe: true,
+    //         innerWidth: 600,
+    //         innerHeight: 500,
+    //         onOpen: function () {
+    //             var link = $(this).attr('href');
+    //             if (typeof _gaq !== 'undefined') {
+    //                 _gaq.push(['_trackEvent', 'Finance with Commercial V3', link, 'Click']);
+    //             }
+    //         }
+    //     });
+    // }
+
+    // if ($("#commercial-bank-pl").length) {
+    //     $("#commercial-bank-pl").colorbox({
+    //         href: "http://bit.ly/combanpl",
+    //         iframe: true,
+    //         innerWidth: 600,
+    //         innerHeight: 500,
+    //         onOpen: function () {
+    //             var link = $(this).attr('href');
+    //             if (typeof _gaq !== 'undefined') {
+    //                 _gaq.push(['_trackEvent', 'Finance with Commercial V3', link, 'Click']);
+    //             }
+    //         }
+    //     });
+    // }
+
+    // if ($('.add-post-content--el-navigation-next .form-submit').length) {
+    //     $('.node-classified-form').submit(function (f) {
+    //         var category = $("input[name='field_cl_category[und]']").val();
+    //         if (typeof _gaq !== 'undefined') {
+    //             _gaq.push(['_setCustomVar', 5, 'CreateNewClassified', category, 2]);
+    //             _gaq.push(['_trackEvent', 'CreateingClassified', 'New advert add Added']);
+    //         }
+    //     });
+    // }
+
+    // if ($('.event-load-more').length) {
+    //     $('.event-load-more').on('click', function () {
+    //         if ($('.event-ly.active').next('.event-ly')) {
+    //             $('.event-ly.active').next('.event-ly').addClass('active');
+    //         }
+    //         if ($('.event-ly.active').length == $('.event-ly').length) {
+    //             $(this).hide();
+    //         }
+    //         return false;
+    //     });
+    // }
+
+    if ($('.event-load-more-soon').length) {
+        $('.event-load-more-soon').on('click', function () {
+            if ($('.event-soon.active').next('.event-soon')) {
+                $('.event-soon.active').next('.event-soon').addClass('active');
+            }
+            if ($('.event-soon.active').length == $('.event-soon').length) {
+                $(this).hide();
+            }
+            return false;
+        });
+    }
+
+
+
+    $('.b-options-block--el-label').on('click', function () {
+        $('.search-button .form-submit').addClass('clicked');
+    });
+
+
+    if ($('.b-header--el-menu-button-label').length) {
+        if ($('body').hasClass('not-logged-in')) {
+            $('.b-header--el-menu-button-label').text('');
+            $('<a class="anonymous-login text-scrolling" href="/user/login">Login</a>').insertAfter('.b-header--el-menu-button');
+        }
+
+        if ($('body').hasClass('section-forum')) {
+            var href = $('.b-header--el-add-post-button--mix-properties').attr('href');
+            $('.b-header--el-add-post-button--mix-properties').attr('href', href + '?forum');
+        }
+
+    }
+
+    if ($('body').attr('data-color-id') != null)
+    {
+
+        var btn_create = $('.b-header--el-add-post-button--mix-properties');
+        ///section-mobile-devices
+        var btn_href = btn_create.attr('href');
+
+        switch ($('body').attr('data-color-id')) {
+            case 'properties':
+                btn_create.attr('href', btn_href + '?type=property');
+                break;
+            case 'vehicles':
+                btn_create.attr('href', btn_href + '?type=vehicles');
+                break;
+            case 'items':
+                var type = 'item';
+                if ($('body').hasClass('section-mobile-devices') || $('body').hasClass('page-v3-classifieds-search-category-mobile-devices')) {
+                    type = 'mobile-device';
+                } else if ($('body').hasClass('section-services')) {
+                    type = 'service';
+                }
+                btn_create.attr('href', btn_href + '?type=' + type);
+                break;
+            case 'jobs':
+                btn_create.attr('href', btn_href + '?type=job');
+                break;
+
+                //mobile-device
+
+        }
+    }
+
+    $('input[type=radio]').each(function () {
+        if ($(this).attr('checked') == 'checked') {
+            $(this).parents('.form-radios').find('.b-options-block--el-label').removeClass('active');
+            $(this).parent('.form-type-radio').find('.b-options-block--el-label').addClass('active');
+        }
+    });
+
+
+    $('input[type=checkbox]').each(function () {
+        if ($(this).attr('checked') == 'checked') {
+            $(this).parent().find('.b-options-block--el-label').addClass('active');
+        }
+    });
+
+
+
+
+
+
+
+    $('time.timeago').timeago();
+
+    $('input[type=checkbox]').change(function () {
+        if ($(this).parent().find('.b-options-block--el-label').hasClass('active')) {
+            $(this).parent().find('.b-options-block--el-label').removeClass('active');
+        } else {
+            $(this).parent().find('.b-options-block--el-label').addClass('active');
+        }
+    });
+
+
+    Drupal.behaviors.v3_search = {
+        attach: function (context, settings) {
+            $('time.timeago').timeago();
+
+            //SET DEFAULT VALUE OF AFTER AJAX
+            search_default = $('#edit-search-input').val();
+            min_price_default = $('#edit-price-min').val();
+            max_price_default = $('#edit-price-max').val();
+            ///////
+
+            $('#collapsible_post_form').click(function () {
+                $(this).hide();
+                $('#node-ajax-build-form').slideToggle();
+            });
+
+
+            $('input[type=radio]').change(function () {
+                $(this).parents('.form-radios').find('.b-options-block--el-label').removeClass('active');
+                $(this).parent('.form-type-radio').find('.b-options-block--el-label').addClass('active');
+            });
+            $('.form-radios ul.b-options-block input[type=radio]').change(function () {
+                $(this).parents('.form-radios').find('.b-options-block--el-label').removeClass('active');
+                $(this).parent('.b-options-block--el-label').addClass('active');
+            });
+            $('li.b-options-block--el-item input[type=checkbox]').change(function () {
+                if ($(this).parent('.b-options-block--el-label').hasClass('active')) {
+                    $(this).parent('.b-options-block--el-label').removeClass('active');
+                } else {
+                    $(this).parent('.b-options-block--el-label').addClass('active');
+                }
+            });
+
+
+
+            if (!$('#vehicle_make_sub').parent('div').attr('class')) {
+                $('#vehicle_make_sub').parent('div').css('display', 'inline-block');
+            }
+            if (!$('#device_make_sub').parent('div').attr('class')) {
+                $('#device_make_sub').parent('div').css('display', 'inline-block');
+            }
+
+            //PRICE SLIDER ON SEARCH PAGES
+            $price_min = $("input[name=price_min]").val();
+            $price_max = $("input[name=price_max]").val();
+
+            $('.b-filter--el-price-mod-min').html(addCommas($price_min) + '<br>QAR');
+            $('.b-filter--el-price-mod-max').html(addCommas($price_max) + '<br>QAR');
+
+            function custom_sliderfieldsSlideChange() {
+                //$('#classified_search_form form').submit();
+            }
+            //END PRICE SLIDER
+
+            function addCommas(nStr)
+            {
+                nStr += '';
+                x = nStr.split('.');
+                x1 = x[0];
+                x2 = x.length > 1 ? '.' + x[1] : '';
+                var rgx = /(\d+)(\d{3})/;
+                while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                }
+                return x1 + x2;
+            }
+
+            $('.js-tab').click(function () {
+                $(".js-tab-content").toggle();
+                $(".js-tab").toggleClass("b-top-users--el-tab--mix-active");
+            });
+            $('.b-close-button').click(function (e) {
+                e.preventDefault();
+                parent.history.back();
+            });
+        }
+    };
+
+    Drupal.behaviors.delayedSearchSubmit = {
+        attach: function (context, settings) {
+            $('input.delayed-search-submit').on('keyup', function () {
+
+                var $self = $(this);
+                var timeout = null;
+                var delay = $self.data('delay');
+                var triggerEvent = $self.data('event');
+                if (!delay) {
+                    delay = 1000;
+                }
+                if (!triggerEvent) {
+                    triggerEvent = 'finished_input';
+                }
+                // Every time a keyup event is fired
+                // timer is reset
+                $self.bind('keyup', function () {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(function () {
+                        $self.trigger(triggerEvent);
+                    }, delay);
+                });
+            });
+        }
+    }
+
+    function roundDecimals(num, dec) {
+        var result = (Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)).toFixed(dec);
+        return result;
+    }
+    function calculatePayment() {
+        if ($.isNumeric($("#loan-amount").val()) &&
+                $("#loan-amount").val() > 0 &&
+                $.isNumeric($("#rate").val()) &&
+                $("#rate").val() > 0 &&
+                $.isNumeric($("#term").val()) &&
+                $("#term").val() > 0) {
+
+            /*
+             Loan Payment Amount Formula.
+             P = ( r * A ) / ( 1 - (1+r)-N) Where, 
+             P = Payment Amount 
+             A = Loan Amount 
+             r = Rate of Interest (compounded) 
+             N = Number of Payments
+             Rate of Interest Compounded is,  
+             If Monthly,  r = i / 1200 and N = n * 12 
+             If Quarterly,  r = i / 400 and N = n * 4 
+             If Half yearly,  r = i / 200 and N = n * 2 
+             If Yearly,  r = i / 100 and N = n				
+             */
+            var loanAmount = $("#loan-amount").val(); /* loan amount */
+            var rate = $("#rate").val() / 100; /* monthly compounded rate */
+            var numPayments = $("#term").val() * 12; /* number of payments */
+            var propertyTax = 0;
+            var insurance = 0;
+
+            //var paymentAmount = (rate * loanAmount) / (1 - (Math.pow(1 + rate, numPayments * -1)));
+            var paymentAmount = ((rate * loanAmount) + (loanAmount * 1)) / numPayments;
+            //paymentAmount = paymentAmount + propertyTax + insurance;
+            $(".calc-result-amount").html("$" + roundDecimals(paymentAmount, 2));
+        }
+    }
+    function configureCalculator() {
+        calculatePayment();
+        $(".form-calc input").on("change keyup input", calculatePayment);
+        //$("#loan-amount").mask("000099.99");
+        //$("#term").mask("09");
+        //$("#rate").mask("09.999");
+        if ($("#property-tax").length) {
+            //	$("#property-tax").mask("00099");
+        }
+        if ($("#insurance").length) {
+            //	$("#insurance").mask("00099");
+        }
+    }
+
+    function clearSearchKeywords() {
+        $("#v3-search-classifieds-form input").not('#edit-search-input').change(function () {
+            $('#edit-search-input').val('');
+        });
+        $('#v3-search-classifieds-form select').on(
+                "change", function (e) {
+                    $('#edit-search-input').val('');
+                });
+    }
+    function updateCartTotal() {
+        var total_price = 0;
+        var is_promote = $('input[name="is_promote"]:checked').length > 0;
+        var is_feature = $('input[name="is_feature"]:checked').length > 0;
+        if ($('.cart-summary').length) {
+            if (is_promote && $('#ql-memberships-promote-form :radio[name=pin]').length) {
+                selected_pin = $('#ql-memberships-promote-form :radio[name=pin]:checked').val();
+                total_price += parseInt($('#ql-memberships-promote-form #price' + selected_pin).val());
+            }
+            if (is_feature && $('#ql-memberships-promote-form :radio[name=featured]').length) {
+                selected_feature = $('#ql-memberships-promote-form :radio[name=featured]:checked').val();
+                total_price += parseInt($('#ql-memberships-promote-form #price' + selected_feature).val());
+            }
+        }
+        $('#cart_total').html(total_price);
+    }
+
+    configureCalculator();
+    clearSearchKeywords();
+    updateCartTotal();
+
+    $('#ql-memberships-promote-form :radio').change(function () {
+        updateCartTotal();
+    });
+    $('#ql-memberships-promote-form :checkbox').change(function () {
+        updateCartTotal();
+    });
+
+    $('.b-card--el-description').ellipsis({
+        lines: 2, // force ellipsis after a certain number of lines. Default is 'auto'
+        ellipClass: 'ellip', // class used for ellipsis wrapper and to namespace ellip line
+        responsive: false      // set to true if you want ellipsis to update on window resize. Default is false
+    });
+
+})(jQuery);

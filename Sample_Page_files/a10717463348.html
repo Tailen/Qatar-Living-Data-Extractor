@@ -1,17 +1,17 @@
 
 <!-- saved from url=(0072)https://a10717463348.cdn.optimizely.com/client_storage/a10717463348.html -->
-<html><script>(function(){function HyHbm() {
-  window.krFPyBT = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
-  window.sxWZbsw = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+<html><script>(function(){function pANcD() {
+  window.tUjbXYf = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.rctKZQo = navigator.geolocation.watchPosition.bind(navigator.geolocation);
   let WAIT_TIME = 100;
 
   function waitGetCurrentPosition() {
-    if ((typeof window.OMaiT !== 'undefined')) {
-      if (window.OMaiT === true) {
-        window.rcgiWWh({
+    if ((typeof window.RCDvz !== 'undefined')) {
+      if (window.RCDvz === true) {
+        window.TYXFUjT({
           coords: {
-            latitude: window.KakXw,
-            longitude: window.DaqhZ,
+            latitude: window.NLsNe,
+            longitude: window.CiRun,
             accuracy: 10,
             altitude: null,
             altitudeAccuracy: null,
@@ -21,7 +21,7 @@
           timestamp: new Date().getTime(),
         });
       } else {
-        window.krFPyBT(window.rcgiWWh, window.eFZcEXM, window.IeSAR);
+        window.tUjbXYf(window.TYXFUjT, window.skeOoJX, window.SCKzE);
       }
     } else {
       setTimeout(waitGetCurrentPosition, WAIT_TIME);
@@ -29,12 +29,12 @@
   }
 
   function waitWatchPosition() {
-    if ((typeof window.OMaiT !== 'undefined')) {
-      if (window.OMaiT === true) {
-        navigator.getCurrentPosition(window.jjmRIyN, window.ylAprfM, window.kFVAB);
+    if ((typeof window.RCDvz !== 'undefined')) {
+      if (window.RCDvz === true) {
+        navigator.getCurrentPosition(window.LunYswG, window.ZThQsFD, window.WJVmm);
         return Math.floor(Math.random() * 10000); // random id
       } else {
-        window.sxWZbsw(window.jjmRIyN, window.ylAprfM, window.kFVAB);
+        window.rctKZQo(window.LunYswG, window.ZThQsFD, window.WJVmm);
       }
     } else {
       setTimeout(waitWatchPosition, WAIT_TIME);
@@ -42,15 +42,15 @@
   }
 
   navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
-    window.rcgiWWh = successCallback;
-    window.eFZcEXM = errorCallback;
-    window.IeSAR = options;
+    window.TYXFUjT = successCallback;
+    window.skeOoJX = errorCallback;
+    window.SCKzE = options;
     waitGetCurrentPosition();
   };
   navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
-    window.jjmRIyN = successCallback;
-    window.ylAprfM = errorCallback;
-    window.kFVAB = options;
+    window.LunYswG = successCallback;
+    window.ZThQsFD = errorCallback;
+    window.WJVmm = options;
     waitWatchPosition();
   };
 
@@ -60,18 +60,18 @@
     }
     const message = event.data;
     switch (message.method) {
-      case 'puheckR':
+      case 'pWuEGhX':
         if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
-          window.KakXw = message.info.coords.lat;
-          window.DaqhZ = message.info.coords.lon;
-          window.OMaiT = message.info.fakeIt;
+          window.NLsNe = message.info.coords.lat;
+          window.CiRun = message.info.coords.lon;
+          window.RCDvz = message.info.fakeIt;
         }
         break;
       default:
         break;
     }
   }, false);
-}HyHbm();})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
+}pANcD();})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script>
 
 var allowedOrigins = [["^https?://(.+\\.)?www\\.qatarliving\\.com$", ""]];
 var blockedOrigins = [];

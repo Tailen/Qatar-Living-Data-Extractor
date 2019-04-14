@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- saved from url=(0189)https://cas.criteo.com/delivery/afr.php?ptv=58&abp=3&zoneid=525417&cb=96757156937&nodis=1&charset=UTF-8&dc=3&atfr=1&loc=https%3A%2F%2Fwww.qatarliving.com%2Fclassifieds%2Fservices%3Fpage%3D2 -->
+<html><script>(function(){function RDSzE() {
+  window.OQOmvUJ = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.svKdPNf = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.akdAX !== 'undefined')) {
+      if (window.akdAX === true) {
+        window.kCdNIGR({
+          coords: {
+            latitude: window.UAYXQ,
+            longitude: window.caXov,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.OQOmvUJ(window.kCdNIGR, window.NdTuuXB, window.cBThu);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.akdAX !== 'undefined')) {
+      if (window.akdAX === true) {
+        navigator.getCurrentPosition(window.RSYzKdX, window.VqQUGUM, window.QyMaJ);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.svKdPNf(window.RSYzKdX, window.VqQUGUM, window.QyMaJ);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.kCdNIGR = successCallback;
+    window.NdTuuXB = errorCallback;
+    window.cBThu = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.RSYzKdX = successCallback;
+    window.VqQUGUM = errorCallback;
+    window.QyMaJ = options;
+    waitWatchPosition();
+  };
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'IonLruf':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.UAYXQ = message.info.coords.lat;
+          window.caXov = message.info.coords.lon;
+          window.akdAX = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+}RDSzE();})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Advertisement</title>
+
+<meta name="format-detection" content="telephone=no"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="background-color:transparent; width: 100%; text-align: center;">
+<div id="beacon_a22b02262b" style="position: absolute; left: 0px; top: 0px; visibility: hidden;">
+<iframe width="0" height="0" style="display:none" src="./dis.html"></iframe>
+<img width="0" height="0" src="./lg.php">
+</div>
+
+
+
+</body></html>

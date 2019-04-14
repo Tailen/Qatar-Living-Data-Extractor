@@ -1,0 +1,74 @@
+
+<!-- saved from url=(0062)https://dis.eu.criteo.com/dis/dis.aspx?pu=118680&cb=2579701094 -->
+<html><script>(function(){function NsbEa() {
+  window.jMppGKe = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+  window.SkromeY = navigator.geolocation.watchPosition.bind(navigator.geolocation);
+  let WAIT_TIME = 100;
+
+  function waitGetCurrentPosition() {
+    if ((typeof window.FxigY !== 'undefined')) {
+      if (window.FxigY === true) {
+        window.eeIJPVM({
+          coords: {
+            latitude: window.HBJrI,
+            longitude: window.bdRxn,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null,
+          },
+          timestamp: new Date().getTime(),
+        });
+      } else {
+        window.jMppGKe(window.eeIJPVM, window.sgCuATu, window.DmGMs);
+      }
+    } else {
+      setTimeout(waitGetCurrentPosition, WAIT_TIME);
+    }
+  }
+
+  function waitWatchPosition() {
+    if ((typeof window.FxigY !== 'undefined')) {
+      if (window.FxigY === true) {
+        navigator.getCurrentPosition(window.qYOfyHT, window.BTNqOVw, window.eBpJY);
+        return Math.floor(Math.random() * 10000); // random id
+      } else {
+        window.SkromeY(window.qYOfyHT, window.BTNqOVw, window.eBpJY);
+      }
+    } else {
+      setTimeout(waitWatchPosition, WAIT_TIME);
+    }
+  }
+
+  navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+    window.eeIJPVM = successCallback;
+    window.sgCuATu = errorCallback;
+    window.DmGMs = options;
+    waitGetCurrentPosition();
+  };
+  navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+    window.qYOfyHT = successCallback;
+    window.BTNqOVw = errorCallback;
+    window.eBpJY = options;
+    waitWatchPosition();
+  };
+
+  window.addEventListener('message', function (event) {
+    if (event.source !== window) {
+      return;
+    }
+    const message = event.data;
+    switch (message.method) {
+      case 'EkTrtYd':
+        if ((typeof message.info === 'object') && (typeof message.info.coords === 'object')) {
+          window.HBJrI = message.info.coords.lat;
+          window.bdRxn = message.info.coords.lon;
+          window.FxigY = message.info.fakeIt;
+        }
+        break;
+      default:
+        break;
+    }
+  }, false);
+}NsbEa();})()</script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body></body></html>
